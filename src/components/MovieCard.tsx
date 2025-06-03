@@ -18,7 +18,7 @@ type MovieCardProps = {
 
 export default function MovieCard({ movie }: MovieCardProps) {
   return (
-    <Card className="group w-full max-w-xs rounded-xl overflow-hidden shadow-xl border-0 bg-gradient-to-br from-background via-muted to-background/80 transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+    <Card className="">
       <div className="relative h-72 w-full">
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
