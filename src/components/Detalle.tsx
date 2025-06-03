@@ -2,10 +2,12 @@
 
 import { ArrowLeft, Calendar, Play, Star, Timer } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import { AppContext } from "@/context/AppContext";
 
 export default function Detalle({ movie, setSelectedMovie }) {
+  const { setPeliculasFavoritas } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [movieData, setMovieData] = useState(null);
 
@@ -35,7 +37,7 @@ export default function Detalle({ movie, setSelectedMovie }) {
     }
   };
 
-  //   console.log(movie);
+  console.log(movieData);
 
   useEffect(() => {
     getMovieDetails();
@@ -67,10 +69,19 @@ export default function Detalle({ movie, setSelectedMovie }) {
             <h2 className="text-3xl font-semibold my-3">{movieData?.title}</h2>
 
             <div className="flex items-center gap-2">
-              <Button>
+              <Button
+                onClick={() =>
+                  setPeliculasFavoritas((prev) =>
+                    prev.some((movie) => movie.id === movieData.id)
+                      ? prev
+                      : [...prev, movieData]
+                  )
+                }
+              >
                 <Star />
-                Añadir a favoritos
+                Agregar a Favoritos
               </Button>
+
               <Button variant={"outline"}>
                 <Play />
                 Ver tráiler
